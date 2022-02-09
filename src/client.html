@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HLS player</title>
+</head>
+<body>
+    <video id="video" width="500" height="500" controls></video>
+    <input type="file" name="file" />
+    <button onclick="onSubmit()">Submit</button>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        function onSubmit() {
+            var myHeaders = new Headers();
+            myHeaders.append("Cookie", "connect.sid=s%3AHRuvsZQvYyo2CgWkoSBbe.4LXs8mxsobRm%2BNEdgyDQ4KmJbL8kNIRdK%2BLswS9nlMQ");
+            var formdata = new FormData();
+            var file = document.querySelector('input[type="file"]').files[0]
+            formdata.append("file", file);
+            console.log(file)
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
+            };
+
+            fetch("http://localhost:8080/upload?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2t6MjF2NGg4MDAwMDA5bDg5eWRnMWV6MSIsImVtYWlsIjoidXNlcjFAbm9tYWRpY3NvZnQubmV0In0sImlhdCI6MTY0NDMyNTIyNH0.tfZfYpmj6xjdhn8QowKnHtZ3Xvc93-plroHxaBKuCrY", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+        }
+        
+        </script>
+    <script>
+        const video = document.getElementById('video')
+        const videoSrc = 'media/xxanu - silence.m3u8?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2t6MjF2NGg4MDAwMDA5bDg5eWRnMWV6MSIsImVtYWlsIjoidXNlcjFAbm9tYWRpY3NvZnQubmV0In0sImlhdCI6MTY0NDMyNTIyNH0.tfZfYpmj6xjdhn8QowKnHtZ3Xvc93-plroHxaBKuCrY'
+
+        const hls = new Hls()
+        hls.loadSource(videoSrc)
+        hls.attachMedia(video)
+        hls.on(Hls.Events.MANIFEST_PARSED, ()=>{
+            video.play()
+        })
+    </script>
+</body>
+</html>
