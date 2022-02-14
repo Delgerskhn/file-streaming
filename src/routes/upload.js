@@ -35,7 +35,9 @@ router.post(
   },
   (req, res) => {
     console.log("uploaded file");
-    res.send(uploadedFileName + ".m3u8");
+    res.json({
+      fname: uploadedFileName + ".m3u8",
+    });
   }
 );
 
