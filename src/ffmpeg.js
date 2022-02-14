@@ -10,6 +10,7 @@ const convertToFfmpeg = (videoPath, outputPath) => {
       "-level 3.0",
       "-start_number 0",
       "-hls_time 10",
+      // "-hls_key_info_file enc.keyinfo",
       "-hls_list_size 0",
       "-f hls",
     ])

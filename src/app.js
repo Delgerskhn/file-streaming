@@ -15,6 +15,10 @@ app.get("/player", (req, res) => {
   res.sendFile(`${__dirname}/client.html`);
 });
 
+app.get("/enc.key", (req, res) => {
+  res.sendFile(path.join(__dirname, "../enc.key"));
+});
+
 app.listen(8080, () => {
   console.log("listening on port 8080");
 });
