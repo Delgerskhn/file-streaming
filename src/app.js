@@ -4,10 +4,12 @@
 // );
 
 const express = require("express");
+var cors = require("cors");
 const mediaRouter = require("./routes/media");
 const uploadRouter = require("./routes/upload");
 const app = express();
 
+app.use(cors());
 app.use("/media", mediaRouter);
 app.use("/upload", uploadRouter);
 
