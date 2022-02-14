@@ -11,7 +11,7 @@ router.get("/*.m3u8", (req, res) => {
   const filename = req.path.substring(1).replaceAll("%20", " ");
   const p = path.join(__dirname, "../videos", "hls", filename);
   fs.readFile(p, (err, data) => {
-    if (err) res.status(400).send("file not found!");
+    if (err) return res.status(400).send("file not found!");
     const tokenInsertedFile = data
       .toString()
       .replaceAll(".ts", ".ts?t=" + req.query.t);
