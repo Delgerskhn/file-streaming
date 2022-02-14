@@ -5,15 +5,17 @@ const fs = require("fs");
 const authorize = require("../middlewares/authorize");
 const path = require("path");
 const convertToFfmpeg = require("../ffmpeg");
-
-let uploadedFileName;
+const { v4: uuidv4 } = require("uuid");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, "../", "videos"));
   },
   filename: function (req, file, cb) {
-    uploadedFileName = req.user.id + file.originalname;
+    var ext = path.extname(file.originalname);
+    var uploadedFileName = uuidv4() + ext;
+    console.log(uploadedFileName);
+    req.body.uploadedFileName = uploadedFileName;
     cb(null, uploadedFileName);
   },
 });
@@ -25,18 +27,24 @@ router.post(
   upload.single("file"),
   (req, res, next) => {
     res.on("finish", () => {
-      console.log("finished", uploadedFileName);
+      const { uploadedFileName } = req.body;
+      var ext = path.extname(uploadedFileName);
       convertToFfmpeg(
         path.join(__dirname, "../videos", uploadedFileName),
-        path.join(__dirname, "../videos/hls", uploadedFileName + ".m3u8")
+        path.join(
+          __dirname,
+          "../videos/hls",
+          uploadedFileName.replace(ext, ".m3u8")
+        )
       );
     });
     next();
   },
   (req, res) => {
-    console.log("uploaded file");
+    const { uploadedFileName } = req.body;
+    var ext = path.extname(uploadedFileName);
     res.json({
-      fname: uploadedFileName + ".m3u8",
+      fname: uploadedFileName.replace(ext, ".m3u8"),
     });
   }
 );

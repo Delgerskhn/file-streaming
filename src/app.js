@@ -9,6 +9,7 @@ const mediaRouter = require("./routes/media");
 const uploadRouter = require("./routes/upload");
 const app = express();
 var whitelist = [
+  "http://localhost:8080",
   "http://localhost:4000",
   "http://localhost:3000",
   "http://103.50.205.199:3000",
@@ -17,7 +18,7 @@ app.use(
   cors({
     credentials: true,
     origin: (origin, callback) => {
-      if (whitelist.indexOf(origin) !== -1) {
+      if (origin === undefined || whitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by cors"));
