@@ -1,6 +1,7 @@
 node_modules/
 src/videos/*
 src/videos/hls/*
+/media/
 
 !src/videos/.gitkeep
 !src/videos/hls/.gitkeep

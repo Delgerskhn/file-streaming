@@ -37,8 +37,4 @@ app.get("/enc.key", (req, res) => {
   res.sendFile(path.join(__dirname, "../enc.key"));
 });
 
-app.listen(8080, () => {
-  console.log("listening on port 8080");
-});
-
 module.exports = app;
