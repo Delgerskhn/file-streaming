@@ -22,20 +22,6 @@ router.get("/*.m3u8$", (req, res) => {
   });
 });
 
-router.get("/:chunkPath/*.m3u8$", (req, res) => {
-  const filename = req.path.substring(1).replaceAll("%20", " ");
-  const p = path.join(__dirname, "../videos", filename);
-  console.log("chunkm3u8");
-  fs.readFile(p, (err, data) => {
-    if (err) return res.status(400).send("file not found!");
-    const tokenInsertedFile = data
-      .toString()
-      .replaceAll(".ts", ".ts?t=" + req.query.t)
-      .replace(".key", ".key?5=" + req.query.t);
-    res.send(tokenInsertedFile);
-  });
-});
-
 router.get("/:chunkPath/*.ts$", (req, res) => {
   const filename = req.path.substring(1).replaceAll("%20", " ");
   console.log(filename);
