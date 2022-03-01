@@ -26,7 +26,7 @@
             redirect: 'follow'
             };
 
-            fetch("http://localhost:8080/upload?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2t6MjF2NGg4MDAwMDA5bDg5eWRnMWV6MSIsImVtYWlsIjoidXNlcjFAbm9tYWRpY3NvZnQubmV0In0sImlhdCI6MTY0NDMyNTIyNH0.tfZfYpmj6xjdhn8QowKnHtZ3Xvc93-plroHxaBKuCrY", requestOptions)
+            fetch(`${window.location.origin}/upload?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2t6MjF2NGg4MDAwMDA5bDg5eWRnMWV6MSIsImVtYWlsIjoidXNlcjFAbm9tYWRpY3NvZnQubmV0In0sImlhdCI6MTY0NDMyNTIyNH0.tfZfYpmj6xjdhn8QowKnHtZ3Xvc93-plroHxaBKuCrY`, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -35,7 +35,7 @@
         </script>
     <script>
         const video = document.getElementById('video')
-        const videoSrc = '/media/1234.mp4.m3u8?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2t6MjF2NGg4MDAwMDA5bDg5eWRnMWV6MSIsImVtYWlsIjoidXNlcjFAbm9tYWRpY3NvZnQubmV0In0sImlhdCI6MTY0NDMyNTIyNH0.tfZfYpmj6xjdhn8QowKnHtZ3Xvc93-plroHxaBKuCrY'
+        const videoSrc = '/media/d8df3e0f-e66f-4563-830d-1d26080191d2.mp4.m3u8?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2t6MjF2NGg4MDAwMDA5bDg5eWRnMWV6MSIsImVtYWlsIjoidXNlcjFAbm9tYWRpY3NvZnQubmV0In0sImlhdCI6MTY0NDMyNTIyNH0.tfZfYpmj6xjdhn8QowKnHtZ3Xvc93-plroHxaBKuCrY'
 
         const hls = new Hls()
         hls.loadSource(videoSrc)

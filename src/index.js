@@ -1,5 +1,5 @@
 const app = require("./app");
 
-app.listen(8080, () => {
-  console.log("hls streaming service listening on port 8080");
+app.listen(3535, () => {
+  console.log("hls streaming service listening on port 3535");
 });

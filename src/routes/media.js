@@ -8,7 +8,6 @@ const router = Router();
 
 router.use("", authorize);
 router.get("/*.m3u8$", (req, res) => {
-  console.log("m3u8");
   const filename = req.path.substring(1).replaceAll("%20", " ");
   const p = path.join(__dirname, "../videos", filename);
   fs.readFile(p, (err, data) => {
@@ -24,7 +23,6 @@ router.get("/*.m3u8$", (req, res) => {
 
 router.get("/:chunkPath/*.ts$", (req, res) => {
   const filename = req.path.substring(1).replaceAll("%20", " ");
-  console.log(filename);
   fs.readFile(path.join(__dirname, "../videos", filename), (err, data) => {
     if (err) res.status(400).send("file not found!");
     res.send(data);

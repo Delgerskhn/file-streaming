@@ -4,16 +4,13 @@ const exec = util.promisify(require("child_process").exec);
 const path = require("path");
 const { randomUUID } = require("crypto");
 const { writeFileSync } = require("fs");
-const convertToFfmpeg = async (filename, videoPath, outputPath) => {
+const convertToFfmpeg = async (filename, videoPath, hostname) => {
   const basePath = __dirname + "/videos";
   const key = randomUUID();
   const keyPath = path.join(basePath, key + ".key");
   const keyInfoPath = path.join(basePath, key + ".keyinfo");
   writeFileSync(keyPath, key);
-  writeFileSync(
-    keyInfoPath,
-    `http://localhost:8080/media/${key}.key\n${keyPath}`
-  );
+  writeFileSync(keyInfoPath, `${hostname}/media/${key}.key\n${keyPath}`);
 
   const commandToScaleSplitEncryptVideo = `ffmpeg -i ${videoPath}  
   -filter_complex  "[0:v]split=2[v1][v2]; [v1]scale=w=1280:h=720[v1out]; [v2]scale=w=640:h=360[v2out]"  
@@ -35,13 +32,6 @@ const convertToFfmpeg = async (filename, videoPath, outputPath) => {
   )}_%v/stream.m3u8
 `;
 
-  const command = `ffmpeg -y -i ${videoPath} ${outputPath}
-    -hls_time 9 
-    -hls_playlist_type vod 
-    -hls_flags independent_segments
-    -hls_segment_type mpegts
-    -hls_key_info_file ${keyInfoPath} 
-    -hls_segment_filename "segmentNo%d.ts" `;
   const { stdout, stderr } = await exec(
     commandToScaleSplitEncryptVideo.split("\n").join(" ")
   );

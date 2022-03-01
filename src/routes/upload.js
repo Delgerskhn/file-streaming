@@ -28,23 +28,18 @@ router.post(
   (req, res, next) => {
     res.on("finish", () => {
       const { uploadedFileName } = req.body;
-      var ext = path.extname(uploadedFileName);
       convertToFfmpeg(
+        uploadedFileName,
         path.join(__dirname, "../videos", uploadedFileName),
-        path.join(
-          __dirname,
-          "../videos/hls",
-          uploadedFileName.replace(ext, ".m3u8")
-        )
+        req.protocol + "://" + req.get("host")
       );
     });
     next();
   },
   (req, res) => {
     const { uploadedFileName } = req.body;
-    var ext = path.extname(uploadedFileName);
     res.json({
-      fname: uploadedFileName.replace(ext, ".m3u8"),
+      fname: uploadedFileName + ".m3u8",
     });
   }
 );
