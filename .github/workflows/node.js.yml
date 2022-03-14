@@ -32,4 +32,6 @@ jobs:
         echo ELEARN_APP_HOST=${{ secrets.ELEARN_APP_HOST }} >> .env
         echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
     - run: npm ci
-    - run: npm start
+    - name: install pm2
+      run: npm install pm2@latest -g
+    - run: pm2 start src/index.js
