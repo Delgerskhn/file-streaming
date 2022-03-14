@@ -4,10 +4,12 @@ const authorize = require("../middlewares/authorize");
 const path = require("path");
 const { videoUploader } = require("../lib/video/multer");
 const { convertToFfmpeg } = require("../lib/video/ffmpeg");
+const { saveFileLocation } = require("../middlewares/saveFileLocation");
 
 router.post(
   "/",
   authorize,
+  saveFileLocation,
   (req, res, next) => {
     videoUploader.single("file")(req, res, function (err) {
       if (err) return res.status(400).send(err.message);

@@ -7,7 +7,6 @@ const videoUploadRouter = require("./routes/upload");
 const imgUploadRouter = require("./routes/imgupload");
 const fileUploadRouter = require("./routes/file");
 const app = express();
-console.log(process.env.ELEARN_APP_HOST);
 var whitelist = [process.env.ELEARN_APP_HOST, "http://localhost:3535"];
 app.use(
   cors({
