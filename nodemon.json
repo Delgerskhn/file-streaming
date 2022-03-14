@@ -1,0 +1,4 @@
+{
+    "verbose": true,
+    "ignore": ["resource/videos/*", "resource/images/*", "resource/files/*"]
+  }

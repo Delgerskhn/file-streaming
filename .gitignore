@@ -1,8 +1,13 @@
 node_modules/
-src/videos/*
-src/videos/hls/*
+resource/videos/*
+resource/files/*
+resource/videos/hls/*
+resource/images/*
 /media/
 
-!src/videos/.gitkeep
-!src/videos/hls/.gitkeep
-!src/videos/hls
+!resource/videos/.gitkeep
+!resource/files/.gitkeep
+!resource/videos/hls/.gitkeep
+!resource/images/.gitkeep
+!resource/videos/hls
+.env

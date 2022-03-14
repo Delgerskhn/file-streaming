@@ -1,20 +1,14 @@
-// convertToFfmpeg(
-//   path.join(__dirname, "videos", "xxanu - silence.mp4"),
-//   path.join(__dirname, "videos", "hls", "xxanu - silence.m3u8")
-// );
-
 const express = require("express");
 var cors = require("cors");
+require("dotenv").config();
+
 const mediaRouter = require("./routes/media");
-const uploadRouter = require("./routes/upload");
+const videoUploadRouter = require("./routes/upload");
+const imgUploadRouter = require("./routes/imgupload");
+const fileUploadRouter = require("./routes/file");
 const app = express();
-var whitelist = [
-  "http://localhost:3535",
-  "http://localhost:4000",
-  "http://localhost:3000",
-  "http://103.50.205.199:3000",
-  "http://103.50.205.199:3535",
-];
+console.log(process.env.ELEARN_APP_HOST);
+var whitelist = [process.env.ELEARN_APP_HOST, "http://localhost:3535"];
 app.use(
   cors({
     credentials: true,
@@ -28,7 +22,9 @@ app.use(
   })
 );
 app.use("/media", mediaRouter);
-app.use("/upload", uploadRouter);
+app.use("/upload", videoUploadRouter);
+app.use("/upload/img", imgUploadRouter);
+app.use("/upload/file", fileUploadRouter);
 
 app.get("/player", (req, res) => {
   res.sendFile(`${__dirname}/client.html`);
