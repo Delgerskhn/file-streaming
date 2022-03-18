@@ -24,10 +24,14 @@ router.get(
           `${process.env.ELEARN_APP_HOST}/api/file/checkPermission?fname=${filename}&t=${t}`
         )
         .then((res) => {
-          next();
+          if (res.data) next();
+          else res.status(401).send("Not authorized");
           console.log(res.data);
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => {
+          res.status(401).send("Not authorized");
+          console.log(err.message);
+        });
     next();
   },
   (req, res) => {
