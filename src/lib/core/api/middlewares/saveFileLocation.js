@@ -12,12 +12,13 @@ const saveFileLocation = (req, res, next) => {
       .post(`${process.env.ELEARN_APP_HOST}/api/file`, data)
       .then((res) => console.log(res.data))
       .catch((error) => {
+        return console.log(error.message);
         if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           console.log("response data", error.response.data);
-          console.log("response status", error.response.status);
-          console.log("response headers", error.response.headers);
+          // console.log("response status", error.response.status);
+          // console.log("response headers", error.response.headers);
         } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of

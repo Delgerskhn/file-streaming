@@ -11,7 +11,7 @@ const convertToFfmpeg = async (filename, videoPath, hostname) => {
   const keyPath = path.join(basePath, filename + ".key");
   const keyInfoPath = path.join(basePath, filename + ".keyinfo");
   writeFileSync(keyPath, key);
-  writeFileSync(keyInfoPath, `${hostname}/media/${filename}.key\n${keyPath}`);
+  writeFileSync(keyInfoPath, `${hostname}/video/${filename}.key\n${keyPath}`);
 
   const commandToScaleSplitEncryptVideo = `ffmpeg -i ${videoPath}  
   -filter_complex  "[0:v]split=2[v1][v2]; [v1]scale=w=1280:h=720[v1out]; [v2]scale=w=640:h=360[v2out]"  
