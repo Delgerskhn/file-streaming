@@ -4,16 +4,19 @@ const exec = util.promisify(require("child_process").exec);
 const path = require("path");
 const { randomUUID, randomBytes } = require("crypto");
 const { writeFileSync } = require("fs");
+const { RESOURCE_PATH } = require("../../const/paths");
 
-const convertToFfmpeg = async (filename, videoPath, hostname) => {
-  const basePath = path.join(__dirname, "../../../resource/videos");
+const convertToFfmpeg = async (filename, videoPath, keyHttpEndpoint) => {
   const key = randomBytes(8).toString("hex");
-  const keyPath = path.join(basePath, filename + ".key");
-  const keyInfoPath = path.join(basePath, filename + ".keyinfo");
+  const keyPath = path.join(videoPath, filename + ".key");
+  const keyInfoPath = path.join(videoPath, filename + ".keyinfo");
   writeFileSync(keyPath, key);
-  writeFileSync(keyInfoPath, `${hostname}/video/${filename}.key\n${keyPath}`);
+  writeFileSync(keyInfoPath, `${keyHttpEndpoint}/${filename}.key\n${keyPath}`);
 
-  const commandToScaleSplitEncryptVideo = `ffmpeg -i ${videoPath}  
+  const commandToScaleSplitEncryptVideo = `ffmpeg -i ${path.join(
+    videoPath,
+    filename
+  )}  
   -filter_complex  "[0:v]split=2[v1][v2]; [v1]scale=w=1280:h=720[v1out]; [v2]scale=w=640:h=360[v2out]"  
   -map [v1out] -c:v:0 libx264 -x264-params "nal-hrd=cbr:force-cfr=1" -b:v:0 3M -maxrate:v:0 3M -minrate:v:0 3M -bufsize:v:0 3M -preset slow -g 48 -sc_threshold 0 -keyint_min 48  
   -map [v2out] -c:v:1 libx264 -x264-params "nal-hrd=cbr:force-cfr=1" -b:v:1 1M -maxrate:v:1 1M -minrate:v:1 1M -bufsize:v:1 1M -preset slow -g 48 -sc_threshold 0 -keyint_min 48  
@@ -25,10 +28,10 @@ const convertToFfmpeg = async (filename, videoPath, hostname) => {
   -hls_flags independent_segments 
   -hls_segment_type mpegts  
   -hls_key_info_file ${keyInfoPath} 
-  -hls_segment_filename ${path.join(basePath, filename)}_%v/data%02d.ts  
+  -hls_segment_filename ${path.join(videoPath, filename)}_%v/data%02d.ts  
   -master_pl_name ${filename}.m3u8  
   -var_stream_map "v:0,a:0 v:1,a:1" ${path.join(
-    basePath,
+    videoPath,
     filename
   )}_%v/stream.m3u8
 `;

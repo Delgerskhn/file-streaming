@@ -54,8 +54,8 @@ router.post(
       const { uploadedFileName } = req.body;
       convertToFfmpeg(
         uploadedFileName,
-        path.join(__dirname, "../../resource/videos", uploadedFileName),
-        req.protocol + "://" + req.get("host")
+        path.join(RESOURCE_PATH, "videos"),
+        req.protocol + "://" + req.get("host") + "/video"
       );
     });
     next();
