@@ -3,6 +3,7 @@ var cors = require("cors");
 require("dotenv").config();
 
 const videoRouter = require("./lib/core/api/routes/video");
+const publicVideoRouter = require("./lib/core/api/routes/publicVideos");
 const imgRouter = require("./lib/core/api/routes/image");
 const fileRouter = require("./lib/core/api/routes/file");
 const app = express();
@@ -23,6 +24,7 @@ app.use(
 );
 
 app.use("/video", videoRouter);
+app.use("/public/video", publicVideoRouter);
 app.use("/img", imgRouter);
 app.use("/file", fileRouter);
 

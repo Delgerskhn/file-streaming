@@ -43,10 +43,14 @@ router.get("/*.key$", (req, res) => {
 router.post(
   "/",
   (req, res, next) => {
-    videoUploader.single("file")(req, res, function (err) {
-      if (err) return res.status(400).send(err.message);
-      next();
-    });
+    videoUploader(path.join(RESOURCE_PATH, "videos")).single("file")(
+      req,
+      res,
+      function (err) {
+        if (err) return res.status(400).send(err.message);
+        next();
+      }
+    );
   },
   saveFileLocation,
   (req, res, next) => {

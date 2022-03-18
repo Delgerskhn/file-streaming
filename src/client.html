@@ -14,6 +14,11 @@
         <button onclick="onSubmit()">Submit</button>
 
     </div>
+    <div>
+        <input type="file" name="publicVideo" />
+        <button onclick="onUploadPublicVideo()">Upload public video</button>
+
+    </div>
 <div>
 
     <input type="file" name="img"/>
@@ -84,11 +89,31 @@
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
         }
+
+        function onUploadPublicVideo() {
+            var myHeaders = new Headers();
+            myHeaders.append("Cookie", "connect.sid=s%3AHRuvsZQvYyo2CgWkoSBbe.4LXs8mxsobRm%2BNEdgyDQ4KmJbL8kNIRdK%2BLswS9nlMQ");
+            var formdata = new FormData();
+            var file = document.querySelector('input[name="publicVideo"]').files[0]
+            formdata.append("file", file);
+            console.log(file)
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
+            };
+
+            fetch(`${window.location.origin}/public/video?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2t6MjF2NGg4MDAwMDA5bDg5eWRnMWV6MSIsImVtYWlsIjoidXNlcjFAbm9tYWRpY3NvZnQubmV0In0sImlhdCI6MTY0NDMyNTIyNH0.tfZfYpmj6xjdhn8QowKnHtZ3Xvc93-plroHxaBKuCrY`, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+        }
         
         </script>
     <script>
         const video = document.getElementById('video')
-        const videoSrc = '/video/b0dc6feb-bd9d-407b-976e-14f86d0a59ad.mp4.m3u8?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2t6MjF2NGg4MDAwMDA5bDg5eWRnMWV6MSIsImVtYWlsIjoidXNlcjFAbm9tYWRpY3NvZnQubmV0In0sImlhdCI6MTY0NDMyNTIyNH0.tfZfYpmj6xjdhn8QowKnHtZ3Xvc93-plroHxaBKuCrY'
+        const videoSrc = '/public/video/00cd50d4-98f1-4cd7-88cc-928ea548d681.mp4.m3u8?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2t6MjF2NGg4MDAwMDA5bDg5eWRnMWV6MSIsImVtYWlsIjoidXNlcjFAbm9tYWRpY3NvZnQubmV0In0sImlhdCI6MTY0NDMyNTIyNH0.tfZfYpmj6xjdhn8QowKnHtZ3Xvc93-plroHxaBKuCrY'
  
         const hls = new Hls()
         hls.loadSource(videoSrc)

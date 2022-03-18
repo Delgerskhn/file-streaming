@@ -21,7 +21,20 @@ const getFile = (fname) => {
   );
 };
 
+const getPublicVideo = (fname) => {
+  return new Promise((res, rej) =>
+    fs.readFile(
+      path.join(RESOURCE_PATH, "publicVideos", fname),
+      (err, data) => {
+        if (err) rej(err);
+        res(data);
+      }
+    )
+  );
+};
+
 module.exports = {
   getImg,
   getFile,
+  getPublicVideo,
 };

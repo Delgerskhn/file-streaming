@@ -2,12 +2,14 @@ node_modules/
 resource/videos/*
 resource/files/*
 resource/videos/hls/*
+resource/publicVideos/*
 resource/images/*
 /media/
 
 !resource/videos/.gitkeep
 !resource/files/.gitkeep
 !resource/videos/hls/.gitkeep
+!resource/publicVideos/.gitkeep
 !resource/images/.gitkeep
 !resource/videos/hls
 .env
