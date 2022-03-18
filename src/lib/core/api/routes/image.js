@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const authorize = require("../middlewares/authorize");
 const { imgUploader } = require("../../../img/multer");
+const authorize = require("../middlewares/authorize");
 const { saveFileLocation } = require("../middlewares/saveFileLocation");
 const { getImg } = require("../../utils/getResource");
 

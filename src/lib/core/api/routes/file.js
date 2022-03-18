@@ -15,13 +15,13 @@ router
   .post(
     "/",
     authorize,
-    saveFileLocation,
     (req, res, next) => {
       fileUploader.single("file")(req, res, function (err) {
         if (err) return res.status(400).send(err.message);
         next();
       });
     },
+    saveFileLocation,
     (req, res) => {
       const { uploadedFileName } = req.body;
       res.json({
