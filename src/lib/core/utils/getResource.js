@@ -6,7 +6,9 @@ const fs = require("fs");
 const getImg = (fname) => {
   return new Promise((res, rej) =>
     fs.readFile(path.join(RESOURCE_PATH, "images", fname), (err, data) => {
-      if (err) rej(err);
+      if (err) {
+        rej(err);
+      }
       res(data);
     })
   );

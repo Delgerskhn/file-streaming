@@ -7,10 +7,14 @@ const { getImg } = require("../../utils/getResource");
 const router = Router();
 
 router
-  .get("/:fname", async (req, res) => {
+  .get("/:fname", async (req, res, next) => {
     const { fname } = req.params;
     if (!fname) res.status(400).send("Bad request");
-    res.send(await getImg(fname));
+    getImg(fname)
+      .then((buffer) => res.send(buffer))
+      .catch((e) => {
+        res.status(404).send("Img not found");
+      });
   })
   .post(
     "/",

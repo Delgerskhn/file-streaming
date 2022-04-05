@@ -6,6 +6,7 @@ const videoRouter = require("./lib/core/api/routes/video");
 const publicVideoRouter = require("./lib/core/api/routes/publicVideos");
 const imgRouter = require("./lib/core/api/routes/image");
 const fileRouter = require("./lib/core/api/routes/file");
+const { exceptionHandler } = require("./lib/core/errors/exceptHandler");
 const app = express();
 var whitelist = [process.env.ELEARN_APP_HOST, "http://localhost:3535"];
 const corsConfig = {
@@ -20,6 +21,7 @@ const corsConfig = {
 };
 app.use(
   cors()
+  // exceptionHandler
   // corsConfig
 );
 

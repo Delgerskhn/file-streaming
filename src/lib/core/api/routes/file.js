@@ -10,7 +10,9 @@ router
   .get("/:fname", async (req, res) => {
     const { fname } = req.params;
     if (!fname) res.status(400).send("Bad request");
-    res.send(await getFile(fname));
+    getFile(fname)
+      .then((buff) => res.send(buff))
+      .catch((e) => res.status(404).send("File not found!"));
   })
   .post(
     "/",

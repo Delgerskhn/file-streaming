@@ -12,12 +12,16 @@ const { getPublicVideo } = require("../../utils/getResource");
 router.get("/:fname", async (req, res) => {
   const { fname } = req.params;
   if (!fname) res.status(400).send("Bad request");
-  res.send(await getPublicVideo(fname));
+  getPublicVideo(fname)
+    .then((buff) => res.send(buff))
+    .catch((e) => res.status(404).send("Video not found!"));
 });
 router.get("/:chunkPath/:chunkName", async (req, res) => {
   const { chunkPath, chunkName } = req.params;
   if (!(chunkPath && chunkName)) res.status(400).send("Bad request");
-  res.send(await getPublicVideo(chunkPath + "/" + chunkName));
+  getPublicVideo(chunkPath + "/" + chunkName)
+    .then((buff) => res.send(buff))
+    .catch((e) => res.status(404).send("Video not found!"));
 });
 
 router.post(

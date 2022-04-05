@@ -25,11 +25,11 @@ router.get(
         )
         .then((res) => {
           if (res.data) next();
-          else res.status(401).send("Not authorized");
+          else res.status(401).send("Don't have permission");
           console.log(res.data);
         })
         .catch((err) => {
-          res.status(401).send("Not authorized");
+          res.status(401).send("Don't have permission");
           console.log(err.message);
         });
     next();
