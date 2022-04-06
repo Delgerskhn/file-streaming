@@ -35,4 +35,4 @@ jobs:
         run: npm install pm2@latest -g
       - run: sudo apt update
       - run: sudo apt install ffmpeg
-      - run: pm2 reload src/index.js
+      - run: pm2 reload 0
