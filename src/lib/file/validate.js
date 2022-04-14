@@ -4,6 +4,7 @@ const whitelist = [
   "application/msword",
   "application/vnd.openxmlformats",
   "officedocument.wordprocessingml.document",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   "application/epub+zip",
   "application/zip",
   "application/vnd.rar",
