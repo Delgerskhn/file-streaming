@@ -20,6 +20,11 @@ var storage = multer.diskStorage({
 const fileUploader = multer({
   storage: storage,
   fileFilter: fileValidator,
+  limits: {
+    fileSize: process.env.MAX_FILE_SIZE_BYTES
+      ? parseInt(process.env.MAX_FILE_SIZE_BYTES)
+      : 5000,
+  },
 });
 
 module.exports = {

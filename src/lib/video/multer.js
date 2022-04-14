@@ -20,6 +20,11 @@ const videoUploader = (uploadPath) => {
   return multer({
     storage: storage,
     fileFilter: validateVideoType,
+    limits: {
+      fileSize: process.env.MAX_VIDEO_SIZE_BYTES
+        ? parseInt(process.env.MAX_VIDEO_SIZE_BYTES)
+        : 3000000,
+    },
   });
 };
 
