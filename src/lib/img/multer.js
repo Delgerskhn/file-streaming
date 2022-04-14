@@ -23,7 +23,7 @@ const imgUploader = multer({
   limits: {
     fileSize: process.env.MAX_IMG_SIZE_BYTES
       ? parseInt(process.env.MAX_IMG_SIZE_BYTES)
-      : 5000,
+      : 5000000,
   },
 });
 

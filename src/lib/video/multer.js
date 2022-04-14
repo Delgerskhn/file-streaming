@@ -23,7 +23,7 @@ const videoUploader = (uploadPath) => {
     limits: {
       fileSize: process.env.MAX_VIDEO_SIZE_BYTES
         ? parseInt(process.env.MAX_VIDEO_SIZE_BYTES)
-        : 3000000,
+        : 3000000000,
     },
   });
 };
