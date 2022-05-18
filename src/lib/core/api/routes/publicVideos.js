@@ -44,10 +44,7 @@ router.post(
       convertToFfmpeg(
         uploadedFileName,
         path.join(RESOURCE_PATH, "publicVideos"),
-        (process.env.NODE_ENV === "production" ? "https" : "http") +
-          "://" +
-          req.get("host") +
-          "/public/video"
+        process.env.SERVICE_HOSTNAME + "/public/video"
       );
     });
     next();
