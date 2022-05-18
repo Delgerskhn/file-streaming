@@ -30,6 +30,7 @@ jobs:
           touch .env
           echo ELEARN_APP_HOST=${{ secrets.ELEARN_APP_HOST }} >> .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
+          echo SERVICE_HOSTNAME=${{ secrets.SERVICE_HOSTNAME }} >> .env
       - run: npm ci
       - name: install pm2
         run: npm install pm2@latest -g
