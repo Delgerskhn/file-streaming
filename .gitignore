@@ -28,6 +28,7 @@ resource/images/*
 
 !resource/images/.gitkeep
 !resource/images/download.jpg
+!resource/images/Logo.png
 !resource/images/img00.png
 !resource/images/img03.png
 !resource/images/img07.png
