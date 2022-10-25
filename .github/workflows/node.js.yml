@@ -35,5 +35,5 @@ jobs:
       - name: install pm2
         run: npm install pm2@latest -g
       - run: sudo apt update
-      - run: sudo apt install ffmpeg -f
+      - run: sudo apt install ffmpeg -Y
       - run: pm2 restart fileservice
